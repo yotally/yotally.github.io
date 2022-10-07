@@ -2,6 +2,7 @@
 <html>
 
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 添加图标库 -->
     <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
@@ -20,11 +21,29 @@
             /* 通过隐藏(hidden)溢出部分变相禁止溢出部分滚动 */
             overflow: hidden;
             margin: 0;
+            /* 显示模式 */
+            /* display: none; */
             font-family: Arial, Helvetica, sans-serif;
+            /* 淡入动画效果属性对应时长次数和填充方向 */
+            animation: fadeInAnimation ease 3s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        /* 淡入动画效果 */
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+
         }
 
         .hero-image {
-            background-image: linear-gradient(rgba(80, 78, 78, 0.5), rgba(46, 45, 45, 0.5)), url("./Figures/Jiwenmount.jpg");
+            background-image: linear-gradient(rgba(126, 126, 126, 0.5), rgba(136, 136, 136, 0.5)), url("./Figures/Jiwenmount.jpg");
             height: 100%;
             background-position: center;
             background-repeat: no-repeat;
@@ -131,6 +150,27 @@
             background: #ff6600;
             color: white;
         }
+
+        /*  加载完成前隐藏  */
+        #hideAll {
+            position: fixed;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+            background-color: white;
+            z-index: 99;
+            /* 最高层   Higher than anything else in the document */
+        }
+
+        /* 加载动图样式
+        #loading {
+            position: fixed;
+            left: 45%;
+            right: 45%;
+            top: auto;
+            bottom: auto;
+        } */
     </style>
     <title>Chai's Page</title>
 </head>
@@ -138,6 +178,13 @@
 <!-- 对body对象使用overflow:hidden属性控制使得溢出部分自动隐藏  侧面实现了禁止滚动 -->
 
 <body>
+    <!-- 隐藏方式 -->
+    <div style="display: none" id="hideAll">
+    </div>
+    <!-- 加载中 -->
+    <script type="text/javascript">
+        document.getElementById("hideAll").style.display = "block";
+    </script>
     <div class="hero-image">
         <div class="hero-text">
             <h1 style="font-size:50px">This is Chai Hao</h1>
@@ -159,25 +206,49 @@
 </html>
 
 <script>
-    //实现图片预加载
-    function preloader() {
-        if (document.images) {
-            var img1 = new Image();
-            img1.src = "./Figures/Jiwenmount.jpg";
-        }
-    }
-    function addLoadEvent(func) {
-        var oldonload = window.onload;
-        if (typeof window.onload != 'function') {
-            window.onload = func;
-        } else {
-            window.onload = function () {
-                if (oldonload) {
-                    oldonload();
-                }
-                func();
-            }
-        }
-    }
-    addLoadEvent(preloader);
+    // 当整个页面加载完成后删去遮罩层
+    window.onload = function () { document.getElementById("hideAll").style.display = "none"; }
+</script>
+
+<script>
+    // //实现图片预加载
+    // function preloader() {
+    //     if (document.images) {
+    //         var img1 = new Image();
+    //         img1.src = "./Figures/Jiwenmount.jpg";
+    //     }
+    // }
+    // function addLoadEvent(func) {
+    //     var oldonload = window.onload;
+    //     if (typeof window.onload != 'function') {
+    //         window.onload = func;
+    //     } else {
+    //         window.onload = function () {
+    //             if (oldonload) {
+    //                 oldonload();
+    //             }
+    //             func();
+    //         }
+    //     }
+    // }
+    // addLoadEvent(preloader);
+
+    /*  等待页面加载完成后显示
+        document.onreadystatechange  是用来监听页面加载过程中的状态
+        参考自博客https://www.cnblogs.com/ailen226/p/4568971.html
+    */
+    // document.onreadystatechange = function () {
+    //     /*readyState 有五种取值：
+    //     1. uninitialized    默认状态
+    //     2. loading          加载开始
+    //     3. loaded           加载完成
+    //     4. interactive      加载完成但尚不可用
+    //     5. complete         所有数据已经准备好
+    //     */
+    //     if (document.readyState == "complete") {
+    //         document.body.style.display = "block";
+    //     } else {
+    //         document.body.style.display = "none";
+    //     };
+    // };
 </script>
