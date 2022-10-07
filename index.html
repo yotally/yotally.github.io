@@ -1,26 +1,183 @@
 <!DOCTYPE html>
-<html lang="en-US">
+<html>
 
 <head>
-    <title>Chai Hao</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 添加图标库 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
+    <style>
+        /* 为了兼容移动端显示来禁止滑动 参考了"https://juejin.cn/post/6844903615912476686"的方法通过固定html部分解决 */
+        html {
+            height: 100%;
+            width: 100%;
+            /* 移动端存在两个滑动属性   一个是html相对于浏览器等框架的滑动  一个是body相对于html的滑动  需要分别处理 */
+            position: fixed;
+
+        }
+
+        body {
+            height: 100%;
+            /* 通过隐藏(hidden)溢出部分变相禁止溢出部分滚动 */
+            overflow: hidden;
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hero-image {
+            background-image: linear-gradient(rgba(80, 78, 78, 0.5), rgba(46, 45, 45, 0.5)), url("./Figures/Jiwenmount.jpg");
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            position: relative;
+        }
+
+        .hero-text {
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+        }
+
+        .hero-text p {
+            display: block;
+            margin-block-start: 16px;
+            margin-block-end: 32px;
+            margin-inline-start: 0px;
+            margin-inline-end: 0px;
+        }
+
+        /* hero-text button配置 */
+        .hero-text button {
+            border: 1px solid #ddd;
+            outline: 0;
+            display: inline-block;
+            padding: 10px 25px;
+            color: black;
+            background-color: #ddd;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            font-family: fantasy;
+        }
+
+        /* hexo-text 悬浮按钮状态 */
+        .hero-text button:hover {
+            background-color: rgb(66, 66, 66);
+            color: white;
+        }
+
+        /* 设置页脚样式 */
+        .footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            color: white;
+            text-align: center;
+        }
+
+        /* 样式化所有 fontawesome 图标 */
+        .fa {
+            padding: 20px;
+            font-size: 20px;
+            width: 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 10%;
+        }
+
+        /* 如果需要，添加悬停效果 */
+        .fa:hover {
+            opacity: 0.7;
+        }
+
+        /* Set a specific color for each brand */
+
+        /* Facebook */
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+        }
+
+        /* Google */
+        .fa-google {
+            background: #dd4b39;
+            color: white;
+        }
+
+        /* QQ */
+        .fa-qq {
+            background: #45bbff;
+            color: white;
+        }
+
+        /* Twitter */
+        .fa-twitter {
+            background: #55ACEE;
+            color: white;
+        }
+
+        /* GitHub */
+        .fa-github {
+            background: #000000;
+            color: white;
+        }
+
+        /* RSS */
+        .fa-rss {
+            background: #ff6600;
+            color: white;
+        }
+    </style>
+    <title>Chai's Page</title>
 </head>
-<header>
-    <div class="box">Homepage of Chai</div>
-</header>
+
+<!-- 对body对象使用overflow:hidden属性控制使得溢出部分自动隐藏  侧面实现了禁止滚动 -->
 
 <body>
-    <div class="masthead">
-        <div class="masthead__inner-wrap">
-            <div class="masthead__menu">
-                <nav id="site-nav" class="greedy-nav">
-                    <li class="masthead__menu-item"><a href="./publications/publications-us-en.html">Notes</a></li>
-                    <li class="masthead__menu-item"><a href="./CV/cv-us-en.html">CV</a></li>
-                    <li class="masthead__menu-item"><a href="./about/about-us-en.html">About</a></li>
-                    <li class="masthead__menu-item"><a href="./Upcoming/upcoming-us-en.html">Upcoming</a></li>
-                </nav>
-            </div>
+    <div class="hero-image">
+        <div class="hero-text">
+            <h1 style="font-size:50px">This is Chai Hao</h1>
+            <!-- 应该用更好的换行方式 -->
+            <p>Maybe a worker on algebraic theory. <br> Always a boring and solitary man.</p>
+            <button onclick="window.location.href ='./home.html'">Find More</button>
+        </div>
+        <div class="footer">
+            <p>
+                <a href="https://www.github.com/yotally" class="fa fa-github"></a>
+                <a href=mailto:1015734811@qq.com class="fa fa-qq"></a>
+                <a href="https://www.cnblogs.com/yotal" class="fa fa-rss"></a>
+            </p>
+            <p>2022-2022@Chai &ensp; Framed by w3c </p>
         </div>
     </div>
 </body>
 
 </html>
+
+<script>
+    //实现图片预加载
+    function preloader() {
+        if (document.images) {
+            var img1 = new Image();
+            img1.src = "./Figures/Jiwenmount.jpg";
+        }
+    }
+    function addLoadEvent(func) {
+        var oldonload = window.onload;
+        if (typeof window.onload != 'function') {
+            window.onload = func;
+        } else {
+            window.onload = function () {
+                if (oldonload) {
+                    oldonload();
+                }
+                func();
+            }
+        }
+    }
+    addLoadEvent(preloader);
+</script>
