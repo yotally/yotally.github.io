@@ -4,9 +4,19 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        /* 为了兼容移动端显示来禁止滑动 参考了"https://juejin.cn/post/6844903615912476686"的方法通过固定html部分解决 */
+        html {
+            height: 100%;
+            width: 100%;
+            /* 移动端存在两个滑动属性   一个是html相对于浏览器等框架的滑动  一个是body相对于html的滑动  需要分别处理 */
+            position: fixed;
+        }
+
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
+            overflow: hidden;
+            /* 字体大小随屏幕自适应 */
         }
 
         /* 覆盖层 */
@@ -88,6 +98,11 @@
             text-decoration: none;
             font-size: 17px;
         }
+
+        /* 文字字体 */
+        #text {
+            font-size: 20px;
+        }
     </style>
 </head>
 
@@ -100,14 +115,15 @@
             <a href="./Works.html">Works</a>
             <a href="./CV.html">CV</a>
             <a href="./About.html">About</a>
+            <a href="./index.html">Back</a>
         </div>
     </div>
 
     <div class="topnav">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()" color="blue">&#9776; About</span>
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()" color="blue"> &#9776; &emsp; About</span>
     </div>
 
-    <div>
+    <div id="text">
         <h2>Short Intro here</h2>
         <p>My name is Chai Hao which is "柴昊" written in simplified Chinese. Other things are not so important.</p>
     </div>
